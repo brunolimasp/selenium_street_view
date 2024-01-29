@@ -4,6 +4,18 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
 
+import re
+
+
+
+def extract_coordinates(url):
+    match = re.search(r'@(-?\d+\.\d+),(-?\d+\.\d+)', url)
+    if match:
+        latitude = match.group(1)
+        longitude = match.group(2)
+        return latitude, longitude
+    else:
+        return None
 
 
 def get_screenshot_street_view(address):
@@ -32,6 +44,12 @@ def get_screenshot_street_view(address):
     collapse_panel = driver.find_element(By.XPATH, """//*[@id="QA0Szd"]/div/div/div[2]/button""")
     collapse_panel.click()
     sleep(2)
+
+    # Obter a URL atual
+    current_url = driver.current_url
+
+    print(extract_coordinates(current_url))
+
     # Tirar um print da tela e salvar a imagem localmente
     driver.save_screenshot('screenshot.png')
     sleep(2)
