@@ -3,9 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
-
 import re
-
 
 
 def extract_coordinates(url):
@@ -58,5 +56,3 @@ def get_screenshot_street_view(address):
 
 # Farmácia Pague Menos
 get_screenshot_street_view("Av. Presidente Wilson, 706 - Centro, São Vicente - SP, 11320-000")
-
-
